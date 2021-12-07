@@ -1,7 +1,6 @@
 package bot
 
 import (
-	"github.com/davecgh/go-spew/spew"
 	tele "gopkg.in/tucnak/telebot.v3"
 	"gopkg.in/tucnak/telebot.v3/layout"
 )
@@ -14,7 +13,6 @@ type Bot struct {
 func IsChannelMessage(b *Bot) tele.MiddlewareFunc {
 	return func(next tele.HandlerFunc) tele.HandlerFunc {
 		return func(c tele.Context) error {
-			spew.Dump(c.Message())
 			if c.Message().SenderChat.Type == "channel" {
 				msg := c.Message()
 				b.Delete(msg)
