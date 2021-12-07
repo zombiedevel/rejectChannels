@@ -13,7 +13,8 @@ type Bot struct {
 func IsChannelMessage(b *Bot) tele.MiddlewareFunc {
 	return func(next tele.HandlerFunc) tele.HandlerFunc {
 		return func(c tele.Context) error {
-			if c.Message().SenderChat.Type == "channel" {
+
+			if c.Message().FromGroup() && c.Message().SenderChat.Type == "channel" {
 				msg := c.Message()
 				b.Delete(msg)
 			}
